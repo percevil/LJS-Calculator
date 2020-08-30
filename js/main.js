@@ -44,13 +44,21 @@ calculatorButtonsDiv.addEventListener('click', e => {
       display.textContent = result + '.';
       // This loop prevents another decimal from being entered into the display
       // LOGIC:  If the result does NOT include a decimal, then display result plus decimal
+
+      if (previousButtonType === 'equal') {
+        display.textContent = '0.';
+        // If the previous key pressed was equals, we want to show 0.
+      }
+      if (previousButtonType === 'operator') {
+        display.textContent = '0.';
+        // If the previous key pressed was an operator, we want to show 0.
+      }
     }
   }
 
   // OPERATOR SECTION
 
   if (buttonType === 'operator') {
-    // console.log('Pressed operator');
     button.classList.add('is-pressed');
     // highlights key that is pressed and adds the pressed state
     calculator.dataset.firstValue = result;
