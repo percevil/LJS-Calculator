@@ -33,7 +33,11 @@ calculatorButtonsDiv.addEventListener('click', e => {
   // DECIMAL SECTION
 
   if (buttonType === 'decimal') {
-    display.textContent = result + '.';
+    if (!result.includes('.')) {
+      display.textContent = result + '.';
+      // This loop prevents another decimal from being entered into the display
+      // LOGIC:  If the result does NOT include a decimal, then display result plus decimal
+    }
   }
 
   // OPERATOR SECTION
@@ -58,13 +62,15 @@ calculatorButtonsDiv.addEventListener('click', e => {
     const operator = calculator.dataset.operator;
     const secondValue = parseFloat(result);
 
-    let newResult;
-    if (operator === 'plus') newResult = firstValue + secondValue;
-    if (operator === 'minus') newResult = firstValue - secondValue;
-    if (operator === 'times') newResult = firstValue * secondValue;
-    if (operator === 'divide') newResult = firstValue / secondValue;
+    if (firstValue && operator) {
+      let newResult;
+      if (operator === 'plus') newResult = firstValue + secondValue;
+      if (operator === 'minus') newResult = firstValue - secondValue;
+      if (operator === 'times') newResult = firstValue * secondValue;
+      if (operator === 'divide') newResult = firstValue / secondValue;
 
-    display.textContent = newResult;
+      display.textContent = newResult;
+    }
   }
 
   // CLEAR SECTION
