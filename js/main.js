@@ -28,6 +28,13 @@ calculatorButtonsDiv.addEventListener('click', e => {
         display.textContent = key;
         // if action was an operator, show the next clicked number
       }
+      if (previousButtonType === 'equal') {
+        display.textContent = key;
+        // when equals key is previously pressed, the next number key will be displayed instead of being appended to the least number before the equals key.
+        delete calculator.dataset.firstValue;
+        delete calculator.dataset.operator;
+        // This will clear the two custom attributes for the next calculation
+      }
     }
   }
   // DECIMAL SECTION
@@ -70,6 +77,9 @@ calculatorButtonsDiv.addEventListener('click', e => {
       if (operator === 'divide') newResult = firstValue / secondValue;
 
       display.textContent = newResult;
+    } else {
+      display.textContent = parseFloat(result) * 1;
+      // Strips unnecessary decimal point
     }
   }
 
